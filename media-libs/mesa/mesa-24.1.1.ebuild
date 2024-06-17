@@ -153,7 +153,6 @@ x86? (
 )"
 
 PATCHES=(
-	"${FILESDIR}"/${PV}-dzn-Include-vulkan_core.h-instead-of-vulkan.h-in-the.patch
 )
 
 pkg_pretend() {
@@ -231,7 +230,7 @@ pkg_setup() {
 		linux-info_pkg_setup
 	fi
 
-	use llvm && llvm-r1_pkg_setup
+	#use llvm && llvm-r1_pkg_setup
 	python-any-r1_pkg_setup
 }
 
@@ -354,7 +353,7 @@ src_configure() {
 	if use llvm && use vulkan && use video_cards_intel && use amd64; then
 		emesonargs+=(-Dintel-clc=system)
 	else
-		emesonargs+=(-Dintel-clc=disabled)
+		emesonargs+=(-Dintel-clc=auto)
 	fi
 
 	if use opengl || use gles1 || use gles2; then
@@ -396,7 +395,6 @@ src_configure() {
 		-Dvideo-codecs=$(usex proprietary-codecs "all" "all_free")
 		-Dgallium-drivers=$(driver_list "${GALLIUM_DRIVERS[*]}")
 		-Dvulkan-drivers=$(driver_list "${VULKAN_DRIVERS[*]}")
-		-Dbuildtype=$(usex debug debug plain)
 		-Db_ndebug=$(usex debug false true)
 	)
 	meson_src_configure
