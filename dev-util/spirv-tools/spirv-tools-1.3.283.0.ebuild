@@ -6,7 +6,7 @@ EAPI=7
 MY_PN=SPIRV-Tools
 PYTHON_COMPAT=( python3_10 )
 PYTHON_REQ_USE="xml(+)"
-inherit cmake-multilib python-any-r1
+inherit cmake-utils python-any-r1
 
 EGIT_COMMIT="vulkan-sdk-${PV}"
 SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
@@ -26,12 +26,12 @@ DEPEND="~dev-util/spirv-headers-${PV}"
 # RDEPEND=""
 BDEPEND="${PYTHON_DEPS}"
 
-multilib_src_configure() {
+src_configure() {
 	local mycmakeargs=(
 		-DSPIRV-Headers_SOURCE_DIR="${ESYSROOT}"/usr/
 		-DSPIRV_WERROR=OFF
 		-DSPIRV_TOOLS_BUILD_STATIC=OFF
 	)
 
-	cmake_src_configure
+	cmake-utils_src_configure
 }

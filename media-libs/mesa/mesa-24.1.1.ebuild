@@ -84,7 +84,7 @@ RDEPEND="
 	vaapi? (
 		>=x11-libs/libva-1.7.3:=
 	)
-	vdpau? ( >=x11-libs/libvdpau-1.4:= )
+	vdpau? ( >=x11-libs/libvdpau-1.5:= )
 	video_cards_radeonsi? ( virtual/libelf:0= )
 	selinux? ( sys-libs/libselinux )
 	wayland? ( >=dev-libs/wayland-1.18.0 )
@@ -350,7 +350,8 @@ src_configure() {
 	emesonargs+=(-Dvulkan-layers=${vulkan_layers#,})
 
 	if use llvm && use vulkan && use video_cards_intel && use amd64; then
-		emesonargs+=(-Dintel-clc=system)
+		emesonargs+=(-Dintel-clc=enabled)
+		PKG_CONFIG_PATH="$(get_llvm_prefix)/$(get_libdir)/pkgconfig"
 	else
 		emesonargs+=(-Dintel-clc=auto)
 	fi
@@ -359,13 +360,13 @@ src_configure() {
 		emesonargs+=(
 			-Degl=enabled
 			-Dgbm=enabled
-			-Dglvnd=true
+			-Dglvnd=enabled
 		)
 	else
 		emesonargs+=(
 			-Degl=disabled
 			-Dgbm=disabled
-			-Dglvnd=false
+			-Dglvnd=disabled
 		)
 	fi
 
@@ -373,11 +374,6 @@ src_configure() {
 		emesonargs+=(-Dglx=dri)
 	else
 		emesonargs+=(-Dglx=disabled)
-	fi
-
-	# merge intel_clc in mesa
-	if use video_cards_intel && use vulkan; then
-		emesonargs+=(-Dintel-clc=enabled)
 	fi
 
 	emesonargs+=(

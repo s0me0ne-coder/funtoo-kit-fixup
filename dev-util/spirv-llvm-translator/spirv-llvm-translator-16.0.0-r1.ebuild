@@ -7,7 +7,7 @@ LLVM_MAX_SLOT="16"
 MY_PN="SPIRV-LLVM-Translator"
 MY_P="${MY_PN}-${PV}"
 
-inherit cmake flag-o-matic llvm multiprocessing
+inherit cmake-utils flag-o-matic llvm multiprocessing
 
 DESCRIPTION="Bi-directional translator between SPIR-V and LLVM IR"
 HOMEPAGE="https://github.com/KhronosGroup/SPIRV-LLVM-Translator"
@@ -43,7 +43,7 @@ PATCHES=(
 
 src_prepare() {
 	append-flags -fPIC
-	cmake_src_prepare
+	cmake-utils_src_prepare
 
 	# https://github.com/KhronosGroup/SPIRV-LLVM-Translator/pull/2555
 	sed -i -e 's/%triple/x86_64-unknown-linux-gnu/' test/DebugInfo/X86/*.ll || die
@@ -58,7 +58,7 @@ src_configure() {
 		-Wno-dev
 	)
 
-	cmake_src_configure
+	cmake-utils_src_configure
 }
 
 src_test() {
