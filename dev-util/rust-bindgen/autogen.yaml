@@ -1,0 +1,10 @@
+rust-bindgen:
+  generator: github-1
+  packages:
+    - rust-bindgen:
+        version: 0.68.1
+        github:
+          user: rust-lang
+          query: releases
+        extensions:
+          - rust

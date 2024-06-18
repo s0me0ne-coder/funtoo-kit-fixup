@@ -53,6 +53,7 @@ REQUIRED_USE="
 	xa? ( X )
 	X? ( gles1? ( opengl ) gles2? ( opengl ) )
 	zink? ( vulkan || ( opengl gles1 gles2 ) )
+	video_cards_intel? ( vulkan? ( opencl ) )
 "
 
 LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.119"
@@ -76,7 +77,6 @@ RDEPEND="
 	)
 	lm-sensors? ( sys-apps/lm-sensors:= )
 	opencl? (
-		>=virtual/opencl-3
 		dev-libs/libclc[spirv(-)]
 		>=dev-util/spirv-tools-1.3.231.0
 		virtual/libelf:0=
@@ -123,8 +123,8 @@ BDEPEND="
 	${PYTHON_DEPS}
 	opencl? (
 		>=virtual/rust-1.62.0
-		>=dev-util/bindgen-0.58.0
-		>=dev-build/meson-1.3.1
+		>=dev-util/rust-bindgen-0.58.0
+		>=dev-util/meson-1.3.1
 	)
 	sys-devel/bison
 	sys-devel/flex
@@ -351,7 +351,6 @@ src_configure() {
 
 	if use llvm && use vulkan && use video_cards_intel && use amd64; then
 		emesonargs+=(-Dintel-clc=enabled)
-		PKG_CONFIG_PATH="$(get_llvm_prefix)/$(get_libdir)/pkgconfig"
 	else
 		emesonargs+=(-Dintel-clc=auto)
 	fi
