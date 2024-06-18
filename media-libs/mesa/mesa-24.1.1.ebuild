@@ -137,6 +137,7 @@ BDEPEND="
 				amd64? (
 					$(python_gen_any_dep "dev-python/ply[\${PYTHON_USEDEP}]")
 					dev-libs/libclc[spirv(-)]
+					dev-util/intel_clc
 				)
 			)
 		)
@@ -350,7 +351,7 @@ src_configure() {
 	emesonargs+=(-Dvulkan-layers=${vulkan_layers#,})
 
 	if use llvm && use vulkan && use video_cards_intel && use amd64; then
-		emesonargs+=(-Dintel-clc=enabled)
+		emesonargs+=(-Dintel-clc=system)
 	else
 		emesonargs+=(-Dintel-clc=auto)
 	fi
