@@ -1,0 +1,9 @@
+pfetch-rs:
+  generator: github-1
+  packages:
+    - pfetch-rs:
+        extensions: rust
+        github:
+          user: Gobidev
+          repo: pfetch-rs
+          query: releases
