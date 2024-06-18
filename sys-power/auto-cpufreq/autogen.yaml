@@ -1,0 +1,9 @@
+auto-cpufreq:
+  generator: github-1
+  packages:
+    - auto-cpufreq:
+        github:
+         user: AdnanHodzic
+         repo: auto-cpufreq
+         query: releases
+
