@@ -136,7 +136,6 @@ BDEPEND="
 			video_cards_intel? (
 				amd64? (
 					$(python_gen_any_dep "dev-python/ply[\${PYTHON_USEDEP}]")
-					~dev-util/intel_clc-${PV}
 					dev-libs/libclc[spirv(-)]
 				)
 			)
@@ -374,6 +373,11 @@ src_configure() {
 		emesonargs+=(-Dglx=dri)
 	else
 		emesonargs+=(-Dglx=disabled)
+	fi
+
+	# merge intel_clc in mesa
+	if use video_cards_intel && use vulkan; then
+		emesonargs+=(-Dintel-clc=enabled)
 	fi
 
 	emesonargs+=(
