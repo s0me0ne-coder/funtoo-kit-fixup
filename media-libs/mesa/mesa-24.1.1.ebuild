@@ -153,6 +153,8 @@ x86? (
 )"
 
 PATCHES=(
+	"${FILESDIR}"/add-llvm-include-path.patch
+	"${FILESDIR}"/add-llvm-include-path-2.patch
 )
 
 pkg_pretend() {
