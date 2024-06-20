@@ -1,0 +1,10 @@
+libdisplay-info:
+  generator: gitlab-v4-1
+  packages:
+    - libdisplay-info:
+        gitlab_server: gitlab.freedesktop.org
+        gitlab:
+          project_id: 14497
+          user: emersion
+          repo: libdisplay-info
+          query: releases

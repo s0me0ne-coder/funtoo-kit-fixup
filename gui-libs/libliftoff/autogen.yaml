@@ -1,0 +1,10 @@
+libliftoff:
+  generator: gitlab-v4-1
+  packages:
+    - libliftoff:
+        gitlab_server: gitlab.freedesktop.org
+        gitlab:
+          project_id: 11950
+          user: emersion
+          repo: libliftoff
+          query: releases

@@ -1,0 +1,13 @@
+diff --git a/meson.build b/meson.build
+index 50279fc..6cf8dbe 100644
+--- a/meson.build
++++ b/meson.build
+@@ -128,7 +128,7 @@ python = find_program('python3')
+ generate_emoji_data_py = files('generate-emoji-data.py')
+ emoji_data = custom_target(
+   'emoji-data',
+-  input: '/usr/share/unicode-data/emoji/emoji-data.txt',
++  input: '/usr/share/unicode/emoji/emoji-data.txt',
+   output: 'emoji-data.h',
+   command: [python, generate_emoji_data_py, '@INPUT@', '@OUTPUT@'])
+ 

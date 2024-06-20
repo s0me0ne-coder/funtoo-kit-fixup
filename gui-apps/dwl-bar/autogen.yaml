@@ -1,0 +1,8 @@
+dwl-bar:
+  generator: github-1
+  packages:
+    - dwl-bar:
+        github:
+          github_user: MadcowOG
+          github_repo: dwl-bar
+          query: releases

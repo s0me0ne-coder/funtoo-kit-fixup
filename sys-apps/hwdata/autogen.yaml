@@ -1,0 +1,8 @@
+hwdata:
+  generator: github-1
+  packages:
+    - hwdata:
+        github:
+          user: vcrhonek
+          repo: hwdata
+          query: releases
